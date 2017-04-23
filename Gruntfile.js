@@ -52,7 +52,35 @@ module.exports = function (grunt) {
       dist: 'dist',
       docs: 'docs/dist'
     },
-
+// JS build configuration
+    mybabel: {
+      dev: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'js/dist/util.js'      : 'js/src/util.js',
+          'js/dist/alert.js'     : 'js/src/alert.js',
+          'js/dist/button.js'    : 'js/src/button.js',
+          'js/dist/carousel.js'  : 'js/src/carousel.js',
+          'js/dist/collapse.js'  : 'js/src/collapse.js',
+          'js/dist/dropdown.js'  : 'js/src/dropdown.js',
+          'js/dist/modal.js'     : 'js/src/modal.js',
+          'js/dist/scrollspy.js' : 'js/src/scrollspy.js',
+          'js/dist/tab.js'       : 'js/src/tab.js',
+          'js/dist/tooltip.js'   : 'js/src/tooltip.js',
+          'js/dist/popover.js'   : 'js/src/popover.js'
+        }
+      },
+      dist: {
+        options: {
+          extends: '../../js/.babelrc'
+        },
+        files: {
+          '<%= concat.bootstrap.dest %>' : '<%= concat.bootstrap.dest %>'
+        }
+      }
+    },
     // JS build configuration
     babel: {
       dev: {
@@ -185,11 +213,19 @@ module.exports = function (grunt) {
     watch: {
       src: {
         files: '<%= concat.bootstrap.src %>',
-        tasks: ['babel:dev']
+        tasks: ['babel:dev', 'exec:push-js']
       },
       sass: {
         files: 'scss/**/*.scss',
-        tasks: ['dist-css', 'docs']
+        tasks: ['dist-css', 'docs', 'exec:push-css']
+      },
+	  mysass: {
+        files: '../../scss/**/*.scss',
+        tasks: ['exec:mysass']
+      },
+	  myjs: {
+        files: '../../js/**/*.js',
+        tasks: ['exec:myjs']
       },
       docs: {
         files: 'docs/assets/scss/**/*.scss',
@@ -217,6 +253,18 @@ module.exports = function (grunt) {
       'clean-css-docs': {
         command: 'npm run clean-css-docs'
       },
+	  myjs: {
+		  command: 'bash -x myjs.sh'
+	  },
+      'mysass': {
+        command: 'npm run mysass'
+      },
+	  'push-js': {
+		  command: 'bash pushjs.sh'
+	  },
+	  'push-css': {
+		  command: 'bash pushcss.sh'
+	  },
       postcss: {
         command: 'npm run postcss'
       },
@@ -332,8 +380,9 @@ module.exports = function (grunt) {
 
   // CSS distribution task.
   grunt.registerTask('sass-compile', ['exec:sass', 'exec:sass-docs'])
+  grunt.registerTask('push-src', ['exec:push-src'])
 
-  grunt.registerTask('dist-css', ['sass-compile', 'exec:postcss', 'exec:clean-css', 'exec:clean-css-docs'])
+  grunt.registerTask('dist-css', ['sass-compile', 'exec:postcss', 'exec:clean-css'])
 
   // Full distribution task.
   grunt.registerTask('dist', ['clean:dist', 'dist-css', 'dist-js'])

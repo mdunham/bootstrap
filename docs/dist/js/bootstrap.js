@@ -1638,7 +1638,7 @@ var Dropdown = function ($) {
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.6): modal.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) 
  * --------------------------------------------------------------------------
  */
 
@@ -2476,7 +2476,7 @@ var ScrollSpy = function ($) {
   return ScrollSpy;
 }(jQuery);
 
-/**
+/**s
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.6): tab.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)

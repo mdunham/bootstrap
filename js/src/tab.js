@@ -1,7 +1,7 @@
 import Util from './util'
 
 
-/**
+/**s
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.6): tab.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
