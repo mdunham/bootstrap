@@ -225,7 +225,7 @@ module.exports = function (grunt) {
       },
 	  myjs: {
         files: '../../js/**/*.js',
-        tasks: ['exec:myjs']
+        tasks: ['exec:myjs', 'babel:dev', 'exec:push-js']
       },
       docs: {
         files: 'docs/assets/scss/**/*.scss',
